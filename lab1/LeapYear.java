@@ -29,5 +29,14 @@ public class LeapYear {
             }
         }
     }
+
+    /**This is the method added to check whether a year gived is a leap year*/
+    public static boolean isLeapYear(int year) {
+        if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
