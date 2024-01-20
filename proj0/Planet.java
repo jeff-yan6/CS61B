@@ -64,4 +64,22 @@ public class Planet {
         }
         return sum;
     }
+
+    public void update(double t, double xxN, double yyN) {
+        double xxA = xxN / this.mass;
+        double yyA = yyN / this.mass;
+
+        this.xxVel += xxA * t;
+        this.yyVel += yyA * t;
+
+        this.xxPos += this.xxVel*t;
+        this.yyPos += this.yyVel*t;
+
+
+
+    }
+
+    public void draw() {
+        StdDraw.picture(this.xxPos, this.yyPos, String.format("images/%s", this.imgFileName));
+    }
 }
