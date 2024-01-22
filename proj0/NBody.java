@@ -24,10 +24,14 @@ public class NBody {
         double radius = readRadius(filename);
         Planet[] p = readPlanets(filename);
 
-        StdDraw.setXscale(0, radius);
-        StdDraw.setYscale(0, radius);
+        StdDraw.enableDoubleBuffering();
+        StdDraw.setScale(-radius, radius);
+        StdDraw.picture(0, 0, "images/starfield.jpg");
 
-        StdOut.printf("%f %f\n", T, dt);
+        for (Planet planet: p) {
+            planet.draw();
+        }
+
         double t = 0;
         while(t <= T) {
 //
@@ -43,11 +47,10 @@ public class NBody {
             StdDraw.picture(0, 0, "images/starfield.jpg");
 
             for(int i = 0 ; i < p.length ; ++i) {
-                StdOut.printf("%f %f ", p[i].xxPos, p[i].yyPos);
                 p[i].draw();
             }
-            StdOut.print("\n");
-            StdDraw.enableDoubleBuffering();
+            
+            StdDraw.show();
             StdDraw.pause(10);
             t += dt;
         }
