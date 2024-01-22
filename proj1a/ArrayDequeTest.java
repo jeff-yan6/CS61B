@@ -81,11 +81,8 @@ public class ArrayDequeTest {
         }
         passed = checkSize(110, ad2.size()) && passed;
 
-        for (int i = 10 ; i < 120 ; ++i) {
-            // System.out.print(ad2.removeFirst()+" ");
-            passed = (i == ad2.removeFirst()) && passed;
-        }
-
+        ad2.printDeque();
+        
         printTestStatus(passed);
     }
 

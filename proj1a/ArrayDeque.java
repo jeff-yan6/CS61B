@@ -7,7 +7,7 @@ public class ArrayDeque<T> {
     public ArrayDeque() {
         array = (T[]) new Object[15];
         size = 0;
-        tail = 1;
+        tail = 0;
         head = 0;
     }
 
@@ -17,8 +17,8 @@ public class ArrayDeque<T> {
         if (head < tail) {
             System.arraycopy(array, 0, newArray, 0, size);
         } else if (head > tail) {
-            int j = 1;
-            for (int i = (head + 1) % (array.length) ; i != tail ; i = (i + 1) % (array.length), j++) {
+            int j = 0;
+            for (int i = head ; i != tail ; i = (i + 1) % (array.length), j++) {
                 newArray[j] = array[i];
             }
             head = 0;
@@ -28,7 +28,7 @@ public class ArrayDeque<T> {
     }
 
     private boolean isFull() {
-        if (size == array.length - 2) {
+        if (size == array.length - 1) {
             return true;
         }
         return false;
@@ -38,8 +38,8 @@ public class ArrayDeque<T> {
         if (isFull()) {
             resize((int )(array.length*2));
         }
-        array[head] = item;
         head = (head - 1 + array.length) % (array.length);
+        array[head] = item;
         size++;
     }
 
@@ -64,7 +64,7 @@ public class ArrayDeque<T> {
         if (isEmpty()) {
             return;
         }
-        int index = (head + 1) % (array.length);
+        int index = head;
         while (index != tail) {
             System.out.print(array[index] + " ");
             index = (index + 1) % (array.length);
@@ -75,43 +75,41 @@ public class ArrayDeque<T> {
         if (size == 0) {
             return null;
         }
-        if(tail == 0) {
-            tail = array.length - 1;
-        } else {
-            tail -= 1;
-        }
+        tail = (tail - 1 + array.length) % (array.length);
+        T ret = array[tail];
         size--;
 
         if (isLowUsage()) {
             resize((int)(array.length * 0.5));
         }
 
-        return array[tail];
+        return ret;
     }
 
     public T removeFirst() {
         if (size == 0) {
             return null;
         }
+        T ret = array[head];
         head = (head + 1) % (array.length);
         size--;
 
         if (isLowUsage()) {
-            resize((int )(array.length * 0.5));
+            resize((int) (array.length * 0.5));
         }
-        return array[head];
+        return ret;
     }
 
     public T get(int index) {
         if (index < 0 || index >= size || isEmpty()) {
             return null;
         }
-        index = (head + 1 + index) % (array.length);
+        index = (head + index) % (array.length);
         return array[index];
     }
 
     private boolean isLowUsage() {
-        if (array.length >= 16 && size / array.length < 0.25) {
+        if (array.length >= 16 && size / ((double) array.length) < 0.25) {
             return true;
         }
         return false;
