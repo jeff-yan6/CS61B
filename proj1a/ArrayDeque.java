@@ -13,17 +13,12 @@ public class ArrayDeque<T> {
 
     private void resize(int capacity) {
         T[] newArray = (T[]) new Object[capacity];
-
-        if (head < tail) {
-            System.arraycopy(array, 0, newArray, 0, size);
-        } else if (head > tail) {
-            int j = 0;
-            for (int i = head ; i != tail ; i = (i + 1) % (array.length), j++) {
-                newArray[j] = array[i];
-            }
-            head = 0;
-            tail = j;
+        int j = 0;
+        for (int i = head ; i != tail ; i = (i + 1) % (array.length), j++) {
+            newArray[j] = array[i];
         }
+        head = 0;
+        tail = j;
         array = newArray;
     }
 
@@ -79,8 +74,8 @@ public class ArrayDeque<T> {
         T ret = array[tail];
         size--;
 
-        if (isLowUsage()) {
-            resize((int)(array.length * 0.5));
+        while (isLowUsage()) {
+            resize((int) (array.length * 0.5));
         }
 
         return ret;
@@ -94,9 +89,10 @@ public class ArrayDeque<T> {
         head = (head + 1) % (array.length);
         size--;
 
-        if (isLowUsage()) {
+        while (isLowUsage()) {
             resize((int) (array.length * 0.5));
         }
+        
         return ret;
     }
 
