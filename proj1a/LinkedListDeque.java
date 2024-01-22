@@ -114,7 +114,7 @@ public class LinkedListDeque<T> {
         return null;
     }
 
-    private getRecursive(int index, LinkedListDeque<T>.Node tmp) {
+    private T getRecursive(int index, LinkedListDeque<T>.Node tmp) {
         if (index == 0) {
             return tmp.item;
         }
