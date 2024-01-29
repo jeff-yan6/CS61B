@@ -1,8 +1,8 @@
-import java.math;
+import java.lang.Math;
 public class OffByOne implements CharacterComparator{
     @Override
     public boolean equalChars(char x, char y) {
         int diff = x - y;
-        return math.abs(diff) == 1;
+        return Math.abs(diff) == 1;
     }
 }
