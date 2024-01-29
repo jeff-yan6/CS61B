@@ -1,3 +1,8 @@
+/**
+ * Deque implemented by array.
+ * @param <T>
+ */
+
 public class ArrayDeque<T> implements Deque<T> {
     private T[] array;
     private int size;
@@ -28,6 +33,7 @@ public class ArrayDeque<T> implements Deque<T> {
         return false;
     }
 
+    @Override
     public void addFirst(T item) {
         if (isFull()) {
             resize((int )(array.length*2));
@@ -37,6 +43,7 @@ public class ArrayDeque<T> implements Deque<T> {
         size++;
     }
 
+    @Override
     public void addLast(T item) {
         if (isFull()) {
             resize((int )(array.length*2));
@@ -46,14 +53,17 @@ public class ArrayDeque<T> implements Deque<T> {
         size++;
     }
 
+    @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
+    @Override
     public int size() {
         return size;
     } 
 
+    @Override
     public void printDeque() {
         if (isEmpty()) {
             return;
@@ -65,6 +75,8 @@ public class ArrayDeque<T> implements Deque<T> {
         }
 
     }
+
+    @Override
     public T removeLast() {
         if (size == 0) {
             return null;
@@ -80,6 +92,7 @@ public class ArrayDeque<T> implements Deque<T> {
         return ret;
     }
 
+    @Override
     public T removeFirst() {
         if (size == 0) {
             return null;
@@ -95,6 +108,7 @@ public class ArrayDeque<T> implements Deque<T> {
         return ret;
     }
 
+    @Override
     public T get(int index) {
         if (index < 0 || index >= size || isEmpty()) {
             return null;
