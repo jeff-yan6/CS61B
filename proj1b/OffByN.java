@@ -1,3 +1,4 @@
+import java.math;
 public class OffByN implements CharacterComparator {
     private int N;
 
@@ -8,6 +9,6 @@ public class OffByN implements CharacterComparator {
     @Override
     public boolean equalChars(char x, char y) {
         int diff = x - y;
-        return diff == N || diff == -N;
+        return math.abs(diff);
     }
 }
