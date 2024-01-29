@@ -10,6 +10,6 @@ public class OffByN implements CharacterComparator {
     public boolean equalChars(char x, char y) {
         int diff = x - y;
 
-        return Math.abs(diff) == 1;
+        return diff == 1 || diff == -1;
     }
 }
